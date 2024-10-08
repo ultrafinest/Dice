@@ -1,22 +1,26 @@
+int totalsum = 0;
 void setup()
   {
-    size(250, 250);
+    size(250, 300);
     background(255);
     noLoop();
   }
 void draw()
   {
+    int randBack= (int)(Math.random() * 255);
+    background(randBack, 150 - randBack, 20 + randBack);
     Die newDie = new Die();
     int randRoll = 0;
-    background(255);
     for(int i = 50; i <= 250; i+= 50){
        line(0, i, 250, i);
        line(i, 0, i, 250);
        for(int x = 50; x <= 250; x+= 50){
          randRoll = newDie.roll();
          newDie.show(x,i, randRoll);
+         totalsum += randRoll;
        }
     }
+    text("Sum: " + totalsum, 100, 275); 
   }
 void mousePressed()
   {
@@ -25,9 +29,9 @@ void mousePressed()
 class Die 
   {
       int randRoll;
+      int sum;
       Die() 
       {
-          this.randRoll = randRoll;
       }
       int roll()
       {
@@ -38,6 +42,7 @@ class Die
           if(randRoll == 1){
             fill(0);
             ellipse(x- 25, y - 25, 5, 5);
+            sum += 1;
           }
           if(randRoll == 2){
             fill(0);
